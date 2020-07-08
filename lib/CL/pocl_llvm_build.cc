@@ -358,9 +358,13 @@ int pocl_llvm_build_program(cl_program program,
 
   // This is required otherwise the initialization fails with
   // unknown triple ''
+  device->llvm_target_triplet="riscv64";
   ss << "-triple=" << device->llvm_target_triplet << " ";
-  if (device->llvm_cpu != NULL)
-    ss << "-target-cpu " << device->llvm_cpu << " ";
+  if (device->llvm_cpu != NULL){
+      device->llvm_cpu="";
+      // ss << "-target-cpu " << device->llvm_cpu << " ";
+  }
+   
 
   POCL_MSG_PRINT_LLVM("all build options: %s\n", ss.str().c_str());
 
@@ -832,6 +836,10 @@ static llvm::Module* getKernelLibrary(cl_device_id device)
     subdir = "hsail64";
     is_host = false;
   }
+#endif
+
+#ifdef BUILD_MONTAGE
+     bool is_host = false;
 #endif
 #ifdef AMDGCN_ENABLED
   if (triple.getArch == Triple::amdgcn) {
