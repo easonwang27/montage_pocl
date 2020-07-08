@@ -33,14 +33,14 @@
  * device.
  */
 
-#ifndef POCL_BASIC_H
-#define POCL_BASIC_H
+#ifndef POCL_MONTAGE_H
+#define POCL_MONTAGE_H
 
 #include "pocl_cl.h"
 #include "pocl_icd.h"
 #include "config.h"
 
 #include "prototypes.inc"
-GEN_PROTOTYPES (basic)
+GEN_PROTOTYPES (montage)
 
-#endif /* POCL_BASIC_H */
+#endif /* POCL_MONTAGE_H */

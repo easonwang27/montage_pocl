@@ -83,8 +83,7 @@ static init_device_ops pocl_devices_init_ops[] = {
 #ifdef BUILD_BASIC
   pocl_basic_init_device_ops,
 #endif
-
-ifdef BUILD_MONTAGE
+#ifdef BUILD_MONTAGE
   pocl_montage_init_device_ops
 #endif
 #ifdef BUILD_PTHREAD

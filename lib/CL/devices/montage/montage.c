@@ -178,7 +178,7 @@ static const char *final_ld_flags[] =
   {"-lm", "-nostartfiles", HOST_LD_FLAGS_ARRAY, NULL};
 
 void
-pocl_init_cpu_device_infos (cl_device_id dev)
+pocl_init_riscv_device_infos (cl_device_id dev)
 {
   size_t i;
   dev->type = CL_DEVICE_TYPE_CPU;
@@ -410,7 +410,7 @@ pocl_montage_init (unsigned j, cl_device_id device, const char* parameters)
   d->current_kernel = NULL;
   device->data = d;
 
-  pocl_init_cpu_device_infos (device);
+  pocl_init_riscv_device_infos (device);
 
   /* hwloc probes OpenCL device info at its initialization in case
      the OpenCL extension is enabled. This causes to printout 
