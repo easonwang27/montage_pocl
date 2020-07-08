@@ -380,12 +380,12 @@ int pocl_llvm_build_program(cl_program program,
     itemcstrs.push_back(itemstrs[idx].c_str());
   }
 
-#ifdef DEBUG_POCL_LLVM_API
+//#ifdef DEBUG_POCL_LLVM_API
   // TODO: for some reason the user_options are replicated,
   // they appear twice in a row in the output
   std::cerr << "### options: " << ss.str()
             << "user_options: " << user_options << std::endl;
-#endif
+//#endif
 
   if (program->build_log[device_i])
     POCL_MEM_FREE(program->build_log[device_i]);
