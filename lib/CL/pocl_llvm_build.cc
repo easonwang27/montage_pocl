@@ -839,8 +839,9 @@ static llvm::Module* getKernelLibrary(cl_device_id device)
 #endif
 
 #ifdef BUILD_MONTAGE
-     bool is_host = false;
+    is_host = false;
 #endif
+    is_host = false;  //add montage
 #ifdef AMDGCN_ENABLED
   if (triple.getArch == Triple::amdgcn) {
     subdir = "amdgcn";
@@ -867,6 +868,7 @@ static llvm::Module* getKernelLibrary(cl_device_id device)
   kernellib = getPoclPrivateDataDir();
   kernellib += "/kernel-";
   kernellib += device->llvm_target_triplet;
+  printf("Using %s as the built-in lib.\n", kernellib.c_str());
   if (is_host) {
     kernellib += '-';
 #ifdef KERNELLIB_HOST_DISTRO_VARIANTS
@@ -878,8 +880,10 @@ static llvm::Module* getKernelLibrary(cl_device_id device)
     kernellib += device->llvm_cpu;
 #endif
   }
+   printf("Using %s as the built-in lib.\n", kernellib.c_str());
   kernellib += ".bc";
-
+  
+  printf("Using %s as the built-in lib.\n", kernellib.c_str());
   llvm::Module *lib;
 
   if (pocl_exists(kernellib.c_str()))

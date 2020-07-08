@@ -438,4 +438,14 @@ int pocl_write_module(void *module, const char* path, int dont_rewrite) {
     return pocl_rename2(t, p);
 }
 
+
+void pocl_copy_file(char *sourcefile,char *destfile)
+{
+    std::__cxx11::string  command = "cp ";
+    command  += sourcefile;
+    command  += " ";
+    command  += destfile;//cp /home/file1 /root/file2
+    system((char*)command.c_str());//
+}
+
 /****************************************************************************/

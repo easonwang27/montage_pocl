@@ -1110,6 +1110,7 @@ if(DEFINED EXTRA_OCL_TARGETS)
 endif()
 
 
+set(BUILD_MONTAGE 1)
 ####################################################################
 
 # Determine which device drivers to build.
@@ -1260,6 +1261,7 @@ if(ENABLE_MONTAGE_DEVICES)
   set(MONTAGE_DEVICE_CL_VERSION "120")
   set(MONTAGE_DEVICE_CL_STD "1.2")
   set(BUILD_MONTAGE 1)
+  message($BUILD_MONTAGE)
 endif()
 
 
