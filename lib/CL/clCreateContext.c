@@ -171,6 +171,9 @@ POname(clCreateContext)(const cl_context_properties * properties,
 
   context->devices = pocl_unique_device_list(devices, num_devices,
                                              &context->num_devices);
+
+
+
   if (context->devices == NULL)
     {
       errcode = CL_OUT_OF_HOST_MEMORY;
@@ -181,6 +184,8 @@ POname(clCreateContext)(const cl_context_properties * properties,
   while (i < context->num_devices)
     {
       device_ptr = context->devices[i++];
+
+      printf("=============> device ptr :%p\n",device_ptr);
       if (device_ptr == NULL)
         {
           POCL_MSG_ERR("one of the devices in device list is NULL\n");
@@ -209,7 +214,7 @@ POname(clCreateContext)(const cl_context_properties * properties,
       goto ERROR_CLEAN_CONTEXT_AND_DEVICES;
     }
 
-  pocl_setup_context(context);
+  pocl_setup_context(context);  //Set minimum byte alignment
 
   pocl_init_mem_manager ();
   

@@ -36,7 +36,7 @@ static pthread_mutex_t console_mutex = PTHREAD_MUTEX_INITIALIZER;
       if (strlen (debug) == 1)
         {
           if (debug[0] == '1')
-            pocl_debug_messages_filter = POCL_DEBUG_FLAG_GENERAL
+            pocl_debug_messages_filter = POCL_DEBUG_FLAG_ALL
                                          | POCL_DEBUG_FLAG_WARNING
                                          | POCL_DEBUG_FLAG_ERROR;
           return;

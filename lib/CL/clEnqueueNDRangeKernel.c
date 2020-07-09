@@ -42,7 +42,7 @@
 #include <errno.h>
 #include <string.h>
 
-//#define DEBUG_NDRANGE
+#define DEBUG_NDRANGE 1
 
 /* Euclid's algorithm for the Greatest Common Divisor */
 static inline size_t
@@ -237,6 +237,9 @@ POname(clEnqueueNDRangeKernel)(cl_command_queue command_queue,
         preferred_wg_multiple = 1;
 
       POCL_MSG_PRINT_INFO("Preferred WG size multiple %zu\n",
+                          preferred_wg_multiple);
+
+      printf("Preferred WG size multiple %zu\n",
                           preferred_wg_multiple);
 
       /* However, we have some constraints about the local size:
@@ -447,7 +450,7 @@ if (local_##c1 > 1 && local_##c1 <= local_##c2 && local_##c1 <= local_##c3 && \
         }
     }
 
-  POCL_MSG_PRINT_INFO("Queueing kernel %s with local size %u x %u x %u group "
+  printf("Queueing kernel %s with local size %u x %u x %u group "
                       "sizes %u x %u x %u...\n",
                       kernel->name,
                       (unsigned)local_x, (unsigned)local_y, (unsigned)local_z,

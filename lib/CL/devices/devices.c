@@ -46,6 +46,7 @@
 #include "common.h"
 #include "pocl_runtime_config.h"
 #include "basic/basic.h"
+#include "montage/montage.h"
 #include "pthread/pocl-pthread.h"
 #include "pocl_debug.h"
 #include "pocl_tracing.h"
@@ -450,7 +451,7 @@ pocl_init_devices ()
   /* Set a global debug flag, so we don't have to call pocl_get_bool_option
    * everytime we use the debug macros */
 #ifdef POCL_DEBUG_MESSAGES
-  const char* debug = pocl_get_string_option ("POCL_DEBUG", "0");
+  const char* debug = pocl_get_string_option ("POCL_DEBUG", "1");
   pocl_debug_messages_setup (debug);
   stderr_is_a_tty = isatty(fileno(stderr));
 #endif

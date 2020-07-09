@@ -38,12 +38,12 @@ POname(clCreateBuffer)(cl_context   context,
   cl_device_id device;
   int errcode;
   unsigned i, j;
-
+  
   POCL_GOTO_ERROR_COND((size == 0), CL_INVALID_BUFFER_SIZE);
 
   POCL_GOTO_ERROR_COND((context == NULL), CL_INVALID_CONTEXT);
   
-  mem = (cl_mem) malloc(sizeof(struct _cl_mem));
+  mem = (cl_mem) malloc(sizeof(struct _cl_mem));   
   if (mem == NULL)
     {
       errcode = CL_OUT_OF_HOST_MEMORY;
@@ -154,8 +154,10 @@ POname(clCreateBuffer)(cl_context   context,
   for (i = 0; i < context->num_devices; ++i)
     {
       /* this is already handled iff available */
-      if (context->svm_allocdev == context->devices[i])
-        continue;
+      if (context->svm_allocdev == context->devices[i]){
+          continue;
+      }
+        
 
       device = context->devices[i];
       assert (device->ops->alloc_mem_obj != NULL);

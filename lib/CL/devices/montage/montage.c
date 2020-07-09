@@ -460,6 +460,7 @@ pocl_montage_alloc_mem_obj (cl_device_id device, cl_mem mem_obj, void* host_ptr)
      in our global address space, and use that*/
   for (i = 0; i < mem_obj->context->num_devices; ++i)
     {
+      printf("mem_obj->device_ptrs[i].available = %d\n",mem_obj->device_ptrs[i].available);
       if (!mem_obj->device_ptrs[i].available)
         continue;
 

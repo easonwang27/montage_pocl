@@ -1083,8 +1083,10 @@ set(HOST_CLANG_FLAGS "${DEFAULT_HOST_CLANG_FLAGS} ${EXTRA_HOST_CLANG_FLAGS}")
 set(HOST_LLC_FLAGS "${DEFAULT_HOST_LLC_FLAGS} ${EXTRA_HOST_LLC_FLAGS}")
 
 # HSA and pthread drivers require basic driver
+#if(ENABLE_HSA)
 if(ENABLE_HSA OR ENABLE_HOST_CPU_DEVICES)
-  set(BUILD_BASIC 1)
+	set(BUILD_BASIC 1)
+	set(BUILD_MONTAGE 1)
 endif()
 
 if(ENABLE_HOST_CPU_DEVICES_1)
@@ -1110,7 +1112,6 @@ if(DEFINED EXTRA_OCL_TARGETS)
 endif()
 
 
-set(BUILD_MONTAGE 1)
 ####################################################################
 
 # Determine which device drivers to build.

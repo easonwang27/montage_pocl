@@ -88,10 +88,12 @@ POname(clCreateKernel)(cl_program program,
       = calloc ((kernel->meta->num_args), sizeof (struct pocl_argument));
   POCL_GOTO_ERROR_COND ((kernel->dyn_arguments == NULL),
                         CL_OUT_OF_HOST_MEMORY);
+  printf("======>kernel->dyn_arguments %p \n",kernel->dyn_arguments);
 
   POCL_LOCK_OBJ (program);
   LL_PREPEND (program->kernels, kernel);
   POCL_RETAIN_OBJECT_UNLOCKED (program);
+  printf("======>program->dyn_arguments %p\n",program->kernels->dyn_arguments);
   POCL_UNLOCK_OBJ (program);
 
   errcode = CL_SUCCESS;
