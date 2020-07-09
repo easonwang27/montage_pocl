@@ -384,12 +384,12 @@ int pocl_llvm_build_program(cl_program program,
     itemcstrs.push_back(itemstrs[idx].c_str());
   }
 
-//#ifdef DEBUG_POCL_LLVM_API
+#ifdef DEBUG_POCL_LLVM_API
   // TODO: for some reason the user_options are replicated,
   // they appear twice in a row in the output
   std::cerr << "### options: " << ss.str()
             << "user_options: " << user_options << std::endl;
-//#endif
+#endif
 
   if (program->build_log[device_i])
     POCL_MEM_FREE(program->build_log[device_i]);
@@ -867,7 +867,7 @@ static llvm::Module* getKernelLibrary(cl_device_id device)
   kernellib = getPoclPrivateDataDir();
   kernellib += "/kernel-";
   kernellib += device->llvm_target_triplet;
-  printf("Using %s as the built-in lib.\n", kernellib.c_str());
+ 
   if (is_host) {
     kernellib += '-';
 #ifdef KERNELLIB_HOST_DISTRO_VARIANTS
@@ -879,10 +879,8 @@ static llvm::Module* getKernelLibrary(cl_device_id device)
     kernellib += device->llvm_cpu;
 #endif
   }
-   printf("Using %s as the built-in lib.\n", kernellib.c_str());
   kernellib += ".bc";
-  
-  printf("Using %s as the built-in lib.\n", kernellib.c_str());
+
   llvm::Module *lib;
 
   if (pocl_exists(kernellib.c_str()))
