@@ -364,8 +364,6 @@ int pocl_llvm_build_program(cl_program program,
       device->llvm_cpu="";
       // ss << "-target-cpu " << device->llvm_cpu << " ";
   }
-   
-
   POCL_MSG_PRINT_LLVM("all build options: %s\n", ss.str().c_str());
 
   std::istream_iterator<std::string> begin(ss);

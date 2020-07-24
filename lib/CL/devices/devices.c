@@ -451,7 +451,7 @@ pocl_init_devices ()
   /* Set a global debug flag, so we don't have to call pocl_get_bool_option
    * everytime we use the debug macros */
 #ifdef POCL_DEBUG_MESSAGES
-  const char* debug = pocl_get_string_option ("POCL_DEBUG", "1");
+  const char* debug = pocl_get_string_option ("POCL_DEBUG", "0");
   pocl_debug_messages_setup (debug);
   stderr_is_a_tty = isatty(fileno(stderr));
 #endif

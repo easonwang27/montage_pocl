@@ -124,6 +124,10 @@ void pocl_cache_final_binary_path (char *final_binary_path, cl_program program,
                                    unsigned device_i, cl_kernel kernel,
                                    _cl_command_node *command, int specialize);
 
+
+void
+pocl_cache_final_lld_path (char *parallel_path,const char *kernel_name);
+
 #ifdef __GNUC__
 #pragma GCC visibility pop
 #endif

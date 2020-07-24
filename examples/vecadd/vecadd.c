@@ -27,6 +27,8 @@
 #include <CL/opencl.h>
 #include <poclu.h>
 
+#include <math.h>
+
 #define N 128
 
 #ifdef __cplusplus

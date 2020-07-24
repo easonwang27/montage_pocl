@@ -86,6 +86,26 @@
  */
 
 #ifdef OCS_AVAILABLE
+
+#define OBJLLD  "/home/fei/llvm10/bin/ld.lld"
+int 
+get_system_output(char *cmd, char *output, int size)
+{
+    FILE *fp=NULL;  
+    fp = popen(cmd, "r");   
+    if (fp)
+    {       
+        if(fgets(output, size, fp) != NULL)
+        {       
+            if(output[strlen(output)-1] == '\n')            
+                output[strlen(output)-1] = '\0';    
+        }   
+        pclose(fp); 
+    }
+    return 0;
+}
+
+
 int
 llvm_codegen (char *output, unsigned device_i, cl_kernel kernel,
               cl_device_id device, _cl_command_node *command, int specialize)
@@ -113,6 +133,10 @@ llvm_codegen (char *output, unsigned device_i, cl_kernel kernel,
   char final_binary_path[POCL_FILENAME_LENGTH];
   pocl_cache_final_binary_path (final_binary_path, program, device_i, kernel,
                                 command, specialize);
+
+//kernel.so
+  char final_lld_path[POCL_FILENAME_LENGTH];
+  pocl_cache_final_lld_path (final_lld_path,kernel_name);
 
   if (pocl_exists (final_binary_path))
     goto FINISH;
@@ -197,8 +221,16 @@ llvm_codegen (char *output, unsigned device_i, cl_kernel kernel,
 
   POCL_MSG_PRINT_INFO ("Linking final module\n");
 
+  char cmd_str[1024];
+  memset( &cmd_str, 0x00, sizeof(cmd_str));
 
-  pocl_copy_file(tmp_objfile,"/home/eawang/work/file");
+  //ld.lld -o objfile.so objfile.o -shared
+  printf("tmp_objfile :%s\n",tmp_objfile);
+  snprintf(cmd_str, sizeof(cmd_str), "%s -o  %s %s -shared", OBJLLD,final_lld_path,tmp_objfile);
+  
+  printf("cmd str :%s\n",cmd_str);
+  get_system_output(cmd_str,final_lld_path,1024);
+  pocl_copy_file(final_lld_path,"/home/eawang/work/file");
 
   /* Link through Clang driver interface who knows the correct toolchains
      for all of its targets.  */
